@@ -1,0 +1,461 @@
+﻿<!DOCTYPE html>
+<head>
+    <script type="text/javascript" src="Scripts/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="Scripts/jquery-ui-1.11.4.js"></script>
+    <script type='text/javascript' src='Scripts/knockout-3.4.0.js'></script>
+    <script type="text/javascript" src="Scripts/jssor.slider.debug.js"></script>
+    <script type="text/javascript" src="Scripts/SliderFunctions.js"></script>
+    <link href="css/cupertino/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css" />
+    <link href="css/NavMenu.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/style_Game.css" rel="stylesheet" />
+    <link href="css/jquery.multiSelect.css" rel="stylesheet" />
+    <title>
+        JSS Multi-Scroller and Knockout Example
+    </title>
+</head>
+<body>
+    <div id='ReplaceWithUniqueId' class="UserControl" data-bind="css: { hideOffscreen: ReplaceWithUniqueIdVM.AmIAHiddenTab }">
+        <div style="margin-top:50px;">
+            <button data-bind="click: ReplaceWithUniqueIdVM.Bigger">Bigger</button>
+            <button data-bind="click: ReplaceWithUniqueIdVM.ToggleLayoutMode">Rearrange</button>
+            <img src="./Images/copy.png" width="20" height="30" data-bind="click: ReplaceWithUniqueIdVM.CopyImage" />
+            <img src="./Images/trash.png" width="20" height="30" data-bind="click: ReplaceWithUniqueIdVM.RemoveImage" />
+            <img src="./Images/cancel.png" width="20" height="30" data-bind="click: ReplaceWithUniqueIdVM.CancelImageActivity" />
+        </div>
+        <br />
+        <!-- Slider Container ...-->
+        <div class="scrollersource" style="float:left" data-bind="foreach: ReplaceWithUniqueIdVM.SliderControls">
+        </div>
+        <!-- End Slider Container ...-->
+
+        <div u="slides" data-deckname='MouseOverTarget' class='MouseOverTarget'
+             data-bind="css: { isDraggable: ReplaceWithUniqueIdVM.ModifyingLayout, boldBorder: ReplaceWithUniqueIdVM.ModifyingLayout }
+                 , style: {
+                     top: ReplaceWithUniqueIdVM.MouseOverTargetTop(), left: ReplaceWithUniqueIdVM.MouseOverTargetLeft
+                     , width: ReplaceWithUniqueIdVM.MouseOverTargetWidth, height: ReplaceWithUniqueIdVM.MouseOverTargetHeight
+                 }" style="position: absolute; overflow: hidden;">
+            <div>
+                <img u="image" data-bind="attr: { src: ReplaceWithUniqueIdVM.MouseOverTargetImage }, style: { top: ReplaceWithUniqueIdVM.MouseOverTargetTop(), left: ReplaceWithUniqueIdVM.MouseOverTargetLeft, width: ReplaceWithUniqueIdVM.MouseOverTargetWidth, height: ReplaceWithUniqueIdVM.MouseOverTargetHeight }" src="./Images/Empty.jpg" />
+            </div>
+        </div>
+
+        <div id="DragElement" style="width:100%"></div>
+        <script type="text/javascript">
+            function ReplaceWithUniqueIdViewModel()
+            {
+                var self = this;
+
+                // Expand the Scroller markup (must preceed KO init)
+                $(".scrollersource").sliderInterface();
+
+                self.ControllerName = "CardRuleCRUD";
+                self.MyUniqueId = "ReplaceWithUniqueId"; // Gets replaced automatically at run time.
+                self.InitData = "ReplaceWithInitData"; // We give this data to the Controller so it knows how to set itself up.
+                self.SubscriptionList = [];
+                self.IsLoading = true;
+                self.BusyWait = ko.observable(true); // When true, the .blocker div is displayed.
+
+                self.EmptyImageUrl = "./Images/Empty.jpg"; // The image to display for no card present.
+                self.ImagesArray = ko.observableArray([
+                    { sliderName: "Group1", url: "./Images/I1.jpg" },
+                    { sliderName: "Group1", url: "./Images/I2.jpg" },
+                    { sliderName: "Group2", url: "./Images/I3.jpg" },
+                    { sliderName: "Group2", url: "./Images/I4.jpg" },
+                    { sliderName: "Group2", url: "./Images/I5.jpg" },
+                    { sliderName: "Group2", url: "./Images/I6.jpg" },
+                    { sliderName: "Group2", url: "./Images/I7.jpg" },
+                    { sliderName: "Group2", url: "./Images/I8.jpg" },
+                    { sliderName: "Group2", url: "./Images/I13.jpg" },
+                    { sliderName: "Group2", url: "./Images/I14.jpg" },
+                    { sliderName: "Group2", url: "./Images/I15.jpg" },
+                    { sliderName: "Group2", url: "./Images/I16.jpg" },
+                    { sliderName: "Group2", url: "./Images/I17.jpg" },
+                    { sliderName: "Group2", url: "./Images/I18.jpg" },
+                    { sliderName: "Group2", url: "./Images/I19.jpg" },
+                    { sliderName: "Group2", url: "./Images/I20.jpg" },
+                    { sliderName: "Group3", url: "./Images/I9.jpg" },
+                    { sliderName: "Group3", url: "./Images/I10.jpg" },
+                    { sliderName: "Group3", url: "./Images/I11.jpg" },
+                    { sliderName: "Group3", url: "./Images/I12.jpg" },
+                    { sliderName: "Group3", url: "./Images/I13.jpg" },
+                    { sliderName: "Group3", url: "./Images/I14.jpg" },
+                    { sliderName: "Group4", url: "./Images/I9.jpg" },
+                    { sliderName: "Group4", url: "./Images/I10.jpg" },
+                    { sliderName: "Group4", url: "./Images/I11.jpg" },
+                    { sliderName: "Group4", url: "./Images/I12.jpg" },
+                    { sliderName: "Group4", url: "./Images/I15.jpg" },
+                    { sliderName: "Group4", url: "./Images/I16.jpg" }
+                ]);
+
+                self.ModifyingLayout = ko.observable(false); // Turns off slider view so we can move things and resize them.
+                self.SliderGroupName = "MyGroup";
+                //self.OldSize = mpvm.ScreenWidth(); // Allows us to see if the user has changed the width of their display.
+                self.MouseOverTargetHeight = ko.observable('200px');
+                self.MouseOverTargetWidth = ko.observable('140px');
+                self.MouseOverTargetTop = ko.observable('250px');
+                self.MouseOverTargetLeft = ko.observable('250px');
+                self.MouseOverTargetImage = ko.observable(self.EmptyImageUrl);
+                self.FollowCursorImageHeight = 70; // Width and height of the little image that
+                self.FollowCursorImageWidth = 50;  // follows the cursor when a user clicks (picks up) a card.
+
+                self.IsBound = false; // True once the ko.applyBindings has been called.  You cannot call that method twice!
+
+                //self.OldSize = mpvm.ScreenWidth(); // Allows us to see if the user has changed the width of their display.
+
+                self.DisposeOfSubscriptions = function ()
+                {   // Dispose of all subscriptions here.
+                    for (key in self.SubscriptionList)
+                    {
+                        self.SubscriptionList[key].dispose();
+                    }
+
+                };
+
+                self.Dispose = function ()
+                {   // Release any links.  Dispose of myself.
+                    self.CancelImageActivity();
+                    $sgf.RemoveAllSliders(self.SliderGroupName);
+                    $("#" + self.MyUniqueId).find('.MouseOverTarget').remove();
+                    defaultPageViewModel.koCurrentViewModelsList.remove(ReplaceWithUniqueIdVM);
+                    self.DisposeOfSubscriptions();
+                    self.ClearObservables(self);
+                    ko.removeNode($('#' + self.MyUniqueId));
+                    self.DisposeObjects(self);
+                    delete ReplaceWithUniqueIdVM;
+                };
+
+                self.DisposeObjects = function (self)
+                {   // Loops through the object and disposes of any objects in it with a dispose command on it.
+                    // and deletes everything so the memory can be garbage collected.
+
+                    for (var key in self)
+                    {
+                        if (ko.isObservable(self[key]) && !self[key].removeAll)
+                        {
+                            if (self[key].dispose)
+                            {
+                                self[key].dispose();
+                            }
+                            else
+                            {
+                                self[key](null);
+                            }
+                        }
+                        delete self[key];
+                        self[key] = null;
+                    }
+                }
+
+                self.ClearObservables = function (self)
+                {   // Loops through the object and clears any observable arrays (using removeAll)
+                    // so the memory can be garbage collected.
+
+                    for (var key in self)
+                    {
+                        if (ko.isObservable(self[key]))
+                        {
+                            if (self[key].removeAll)
+                            {
+                                try
+                                {
+                                    self[key].removeAll();
+                                }
+                                catch (er)
+                                {
+                                    // sometimes removeAll throws an error that "slice" is not valid.
+                                }
+                            }
+                        }
+                    }
+                }
+
+                self.BindData = function ()
+                {   // Binds the viewmodel
+                    if (self.IsBound == false)
+                    {
+                        ko.applyBindings(ReplaceWithUniqueIdVM, $('#' + self.MyUniqueId)[0]);
+                        $sgf.ActivateAllSliders(self.SliderGroupName);
+                        self.IsBound = true;
+                    };
+                };
+
+                self.SubscribeToChanges = function ()
+                {   // Set ourselves up, if desired, to watch for any changes the user makes to values.
+
+                    // Example of how I used this in my app:
+                    //self.SubscriptionList.push(self.DefaultFilterEnabled.subscribe(function (newValue)
+                    //{    // This fires when DefaultFilterEnabled changes. IE: When the default filter (on/off) status changes
+                    //    self.UpdateFilterEnabled(newValue);
+                    //}, self));
+                };
+
+                Object.defineProperty
+                    (self, "SliderControls",
+                        {
+                            get: function ()
+                            {
+                                return ($.internal_SliderFunctions.SliderGroups[self.SliderGroupName]);
+                            }
+                        }
+                    );
+
+                self.BuildSliderControl = function (name)
+                {
+                    var imgs = self.ImagesArray();
+                    var index = 0;
+                    // Create image objects from the list
+                    var sliderImageArray = [];
+
+                    for (key in imgs)
+                    {
+                        if (name === imgs[key].sliderName)
+                        {
+                            var image = new $.internal_SliderFunctions.SliderImageObject();
+                            image.Options["Source"] = imgs[key];
+                            image.Options["SliderName"] = imgs[key].sliderName;
+                            image.Url = imgs[key].url;
+                            image.ImageIndex = index;
+                            index += 1;
+                            sliderImageArray.push(image);
+                        }
+                    }
+
+                    // Creates a single Slider Control object but the slider is not "activated". call sliderControl.ActivateSlider() to create it.
+                    var sliderControl = new $.internal_SliderFunctions.SliderControlObject();
+                    sliderControl.SliderName = name;
+                    sliderControl.DisplayName = 'My ' + name;
+                    sliderControl.EmptyImageUrl = self.EmptyImageUrl;
+                    sliderControl.ModifyingLayout = self.ModifyingLayout;
+                    sliderControl.Image_MouseOverAction = self.NewImageUnderMouse;
+                    sliderControl.Image_MouseDownAction = self.ImageUnderMouseDown;
+                    sliderControl.Image_MouseUpAction = self.ImageUnderMouseUp;
+                    sliderControl.OnImageClick = self.ImageClicked;
+                    sliderControl.Options.Whatever = "Hello";
+                    sliderControl.ScalePercent = 150;
+                    sliderControl.Top = self.SliderControls().length + 1 * 100; // Space the sliders apart
+                    sliderControl.Left = 0;
+                    sliderControl.SliderWidth = 250;
+                    sliderControl.SliderHeight = 70;
+                    sliderControl.DisplayPieces = 5;
+                    if (self.SliderControls().length > 1)
+                    {   // Make these sliders different
+                        sliderControl.NormalImageWidth = 75;
+                        sliderControl.NormalImageHeight = 50;
+                    }
+                    sliderControl.ImageObjectArray(sliderImageArray);
+
+                    self.SliderControls.push(sliderControl);
+                };
+
+                self.MouseMoveHandler = function (e)
+                {
+                    $('#followTheCursor').offset({
+                        left: e.pageX,
+                        top: e.pageY + 20
+                    });
+                };
+
+                self.ImageClicked = function (data, event, target, imageIndex, sliderId, sliderName, imageObject)
+                {
+                    self.ClearPictureDragActivity();
+
+                    // We could be picking up or dropping...
+                    if (self.ImageSelected === undefined)
+                    {   // User is grabbing a card (picking up)
+                        self.SetPictureDragActivity(imageObject, sliderName);
+                    }
+                    else
+                    {
+                        // User is dropping image (Move picture from current list to new list.
+                        var imgs = self.ImagesArray();
+                        var index = 0;
+
+                        $sgf.RemoveImageFromSlider(self.SliderGroupName, self.SliderPileSelected, self.ImageSelected);
+                        $sgf.AddImageToSlider(self.SliderGroupName, sliderName, self.ImageSelected, imageObject.ImageIndex);
+                        // Clear stored image
+                        self.ImageSelected = undefined;
+                    }
+                };
+
+                self.CopyImage = function (doClose)
+                {
+                    self.ClearPictureDragActivity();
+                    $sgf.AddImageToSlider(self.SliderGroupName, self.SliderPileSelected, self.ImageSelected);
+                    // Clear stored image
+                    self.ImageSelected = undefined;
+                };
+
+                self.RemoveImage = function (doClose)
+                {
+                    self.ClearPictureDragActivity();
+                    $sgf.RemoveImageFromSlider(self.SliderGroupName, self.SliderPileSelected, self.ImageSelected);
+                    // Clear stored image
+                    self.ImageSelected = undefined;
+                };
+
+                self.Bigger = function (doClose)
+                {
+                    var index = 1;
+                    var slider = self.SliderControls()[index];
+                    self.SliderControls.remove(slider);
+                    slider.SliderWidth += 50;
+                    slider.SliderHeight += 25;
+                    slider.DeActivateSlider();
+
+                    self.SliderControls.splice(index, 0, slider);
+                    slider.ActivateSlider();
+                };
+
+                self.CancelImageActivity = function (doClose)
+                {
+                    self.ClearPictureDragActivity();
+                    // Clear stored image
+                    self.ImageSelected = undefined;
+                };
+
+                self.SetPictureDragActivity = function (imageObject, sliderName)
+                {
+
+                    if (imageObject.Options['Source'] !== 'Empty')
+                    {
+                        // Create a copy of the image that was clicked and have it follow the cursor so the user
+                        self.ImageSelected = imageObject;
+                        self.SliderPileSelected = sliderName;
+
+                        var img = $('<img id="followTheCursor" />'); //Equivalent: $(document.createElement('img'))
+                        img.attr('src', self.ImageSelected.Url)
+                            .height(self.FollowCursorImageHeight)
+                            .width(self.FollowCursorImageWidth);
+
+
+                        img.appendTo('#DragElement');
+
+                        $(document).mousemove(self.MouseMoveHandler);
+                    }
+
+                };
+                self.ClearPictureDragActivity = function ()
+                {
+                    // Remove any card trailing the cursor.
+                    $(document).unbind("mousemove", self.MouseMoveHandler);
+                    $('#followTheCursor').remove();
+                };
+
+                self.ImageUnderMouseUp = function (data, event)
+                {
+                    self.HideFullImage();
+                    clearTimeout(self.MouseDownTime);
+                };
+
+                self.ImageUnderMouseDown = function (data, event)
+                {   // If the user holds down the mouse for more than 2 seconds on a card, we pop a full size card image up for them.
+                    clearTimeout(self.MouseDownTime);
+                    self.MouseDownTime = setTimeout(function ()
+                    {
+                        self.ShowFullImage(data);
+                    }, 2000);
+                    return true;
+                };
+
+                self.InitializeDraggable = function ()
+                {
+                    if (!self.isDraggableInitialized)
+                    {
+                        self.isDraggableInitialized = true;
+
+                        //$(".item-container").resizable({
+                        //    handles: {
+                        //        'se': '.ui-resizable-se'
+                        //    }
+                        //});
+                        $(".isDraggable").resizable().draggable(
+                            {
+                                drag: function ()
+                                {
+                                    var offset = $(this).offset();
+                                    var xPos = offset.left;
+                                    var yPos = offset.top;
+                                    $(this).find('#posX > span').text(xPos);
+                                    $(this).find('#posY > span').text(yPos);
+                                },
+                                stop: function ()
+                                {
+                                    var finalOffset = $(this).offset();
+                                    var finalxPos = finalOffset.left;
+                                    var finalyPos = finalOffset.top;
+
+                                    $(this).find('#finalX > span').text(finalxPos);
+                                    $(this).find('#finalY > span').text(finalyPos);
+                                    $(this).find('#width > span').text($(this).width());
+                                    $(this).find('#height > span').text($(this).height());
+                                },
+                                disabled: true
+                            }
+                        );
+                    }
+                };
+                self.ToggleLayoutMode = function ()
+                {
+                    var ml = !self.ModifyingLayout();
+                    if (ml)
+                    {
+                        self.ModifyingLayout(ml);
+                        self.InitializeDraggable();
+                        $(".isDraggable").draggable('enable');
+                    }
+                    else
+                    {
+                        self.InitializeDraggable();
+                        $(".isDraggable").draggable('disable');
+                        self.ModifyingLayout(ml);
+                    }
+                };
+
+                self.ShowFullImage = function (data)
+                {  // If the user holds down the mouse for more than 2 seconds on a card, we pop a full size card image up for them.
+                    //        alert('finish');
+                };
+
+                self.HideFullImage = function ()
+                {
+
+                };
+
+                self.NewImageUnderMouse = function (data, event, target, imageIndex, sliderId, sliderName, imageObject)
+                {  // If the user moves the cursor over an image, display it in the MouseOverTargetImage
+                    if (imageObject.Options['Source'] === 'Empty')
+                    {
+                        return;
+                    }
+                    self.MouseOverTargetImage(imageObject.Url);
+                };
+
+                self.Initialize = function ()
+                {   // Runs any setup or initialization logic
+
+                    var imgs = self.ImagesArray();
+                    var sliderNames = [];
+
+                    $.internal_SliderFunctions.GroupFunctions.AddSliderControlGroup(self.SliderGroupName);
+
+                    // Determine Slider Names
+                    for (key in imgs)
+                    {
+                        var name = imgs[key].sliderName;
+                        if ($.inArray(name, sliderNames) === -1)
+                        {
+                            sliderNames.push(name);
+                            self.BuildSliderControl(name);
+                        }
+                    }
+                    self.BindData();
+                };
+            }
+
+            var ReplaceWithUniqueIdVM = new ReplaceWithUniqueIdViewModel();
+            ReplaceWithUniqueIdVM.Initialize();
+
+        </script>
+    </div>
+</body>

@@ -1,0 +1,99 @@
+﻿body {
+    background:#eee;
+    margin:0;
+    padding:0;
+}
+.menuDiv {
+    background:lightblue;
+    border:1px #000 solid;
+    margin:10px auto;
+    padding:2px;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+}
+
+
+/* main menu styles */
+#nav,#nav ul {
+    background-image:url(../images/tr75.png);
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+#nav {
+    height:29px;
+    padding-left:25px;
+    padding-top:0px;
+    position:relative;
+    z-index:2;
+}
+#nav ul {
+    left:-9999px;
+    position:absolute;
+    top:29px;
+    width:auto;
+}
+#nav ul ul {
+    left:-9999px;
+    position:absolute;
+    top:0;
+    width:auto;
+}
+#nav li {
+    float:left;
+    margin-right:1px;
+    position:relative;
+}
+#nav li a
+{
+    background: #33CCFF;
+    margin-right: 14px;
+    color: #000;
+    display: block;
+    float: left;
+    font-size: 12px;
+    padding: 8px 15px;
+    text-decoration: none;
+}
+#nav > li > a {
+    -moz-border-radius:2px,0,0,0;
+    -webkit-border-radius:2px,0,0,0;
+    -o-border-radius:2px,0,0,0;
+    border-radius:2px,0,0,0;
+
+    overflow:hidden;
+}
+#nav li a.fly {
+    background:cyan url(/images/left-arrow.gif) no-repeat right center;
+    padding-right:14px;
+}
+#nav ul li {
+    margin:0;
+}
+#nav ul li a {
+    width:105px;
+    padding-right:2px;
+}
+#nav ul li a.fly {
+    padding-right:2px;
+}
+
+/*hover styles*/
+#nav li:hover > a {
+    background-color:blue;
+    color:#fff;
+}
+
+/*focus styles*/
+    #nav li a:focus {
+    outline-width:0;
+}
+
+/*popups*/
+#nav li a:active + ul.dd,#nav li a:focus + ul.dd,#nav li ul.dd:hover {
+    left:0;
+}
+#nav ul.dd li a:active + ul,#nav ul.dd li a:focus + ul,#nav ul.dd li ul:hover {
+    left:120px;
+}

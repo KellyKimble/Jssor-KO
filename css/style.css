@@ -1,0 +1,679 @@
+
+
+.SelectedCard {
+    border-color: red;
+    border-width: 3px;
+
+}
+.ui-multiselect-checkboxes {
+    background-color: mediumaquamarine;
+}
+.ui-multiselect-checkboxes label
+{
+    padding: 0 0 0 0 ;
+}
+
+.FadeImage {
+ /*background-image:url('/images/Production.gif');*/
+ opacity:0.03;
+ position:absolute;
+ top:0; bottom:0; left:0; right:0;
+ width: 100%;
+ height: 100%;
+ z-index:-99999;
+}
+
+.HardImage {
+    position: absolute;
+    top: 0px;
+    right: 1em;
+    z-index: 9999;
+    width: 2em;
+    height: 2.5em;
+    background-size: cover;
+}
+
+.button {
+   background-color: rgba(17,178,184,1);
+   border: solid 5px rgba(91,171,128,1);
+   -webkit-border-radius: 33px;
+      -moz-border-radius: 33px;
+           border-radius: 33px;
+   width: 64px;
+   padding: 4px;
+   display: inline-block;
+   color: rgba(0,0,0,1);
+}
+
+.GroupedSpan {
+    border: 1px;
+    border-color: red;
+    border-style: solid;
+    display: inline-block;
+}
+
+.BorderRed {
+    border: 1px;
+    border-color: red;
+    border-style: solid;
+    display: inline-block;
+}
+
+.RoleGroups {
+    float:left;
+    margin: .5em;
+    background-color:aquamarine;
+}
+
+.RoleGroupTitle {
+    font-size: 150%;
+    text-decoration:underline;
+}
+
+.AccessRoles{
+    float:left;
+    margin: .5em;
+    background-color:beige;
+}
+
+.RoleGroups > span:first-of-type, .AccessRoles > span:first-of-type {
+    font-size: 200%;
+}
+
+.Blocker
+{
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    z-index: 10002; 
+    background-color: Gray;
+    filter: alpha(opacity=70); 
+    opacity: 0.7;
+}
+.SecurityItem select
+{
+    clear:both;
+    float: none;
+}
+
+.NewSecurityItem
+{
+    margin-left: 1em;
+    background-color: #D1FFFD;
+    color: #979797;
+    height: 18px;
+    padding-left:10px;
+    width: 3em;
+    box-shadow: 2px 2px 0 #828181 inset;
+     border: 0;
+    border-radius:5px 0px 0px 5px;
+    font-family: Sansation,Arial;
+    vertical-align:middle;
+}
+
+.NewSecurityItemLink {
+    background-color: #D1FFFD;
+    color: #979797;
+    height: 18px;
+    padding: 0 .5em;
+    width: 91px;
+    box-shadow: inset 2px 2px 0px #828181;
+    border: 0;
+    border-radius: 0px 5px 5px 0px;
+    font-family: Sansation,Arial;
+    vertical-align:middle;
+    cursor: pointer;
+}
+
+.SecurityItem
+{
+    margin-left: 1em;
+}
+
+.SecurityItem > select
+{
+    /*margin-bottom: 1em;*/
+}
+
+.AlertColor
+{
+    color:red;
+}
+.ActiveTabBorder {
+    font-style: italic;
+    border-style: solid;
+    border-color: lawngreen;
+    border: 5px;
+}
+
+.hoveredCloseButton {
+    float: right;
+    margin-top: -0.3em;
+    margin-left: -2.5em;
+    font-size: 11px;
+    position:relative;
+    /*font-family: helvetica;
+    color: tray;*/
+    display: none;
+}
+
+li:hover .hoveredCloseButton {
+    display: block;
+}
+
+.FilterSpan
+{
+    display: inline-table;
+    /*margin-bottom: 0.5em;
+    margin-right: 0.5em;*/
+}
+ .clearClass {
+    clear:both;
+}
+
+.hideOffscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.UserControl {
+    width: 90%;
+    height: 80%;
+}
+
+.notShown {
+    display:none;
+}
+
+/* Filter area classes */
+.FilterArea {
+    /*padding-top:1em;
+    padding-bottom:1em;*/
+    width: 100%;
+    overflow: auto;
+    background-color: tomato;
+}
+.FilterOptions > span {
+width: 200px;
+    padding-right:1em;
+    padding-left:1em;
+    float:left;
+}
+.FilterOptions > span > span {
+    margin-right:.5em;
+
+}
+.FilterOptions > span > span::after {
+    content: "\A";
+
+}
+
+.FilterFooter {
+    float:right;
+    clear:both;
+}
+
+.clearFilter {
+    float:left;
+    clear:both;
+    margin-top:1em;
+}
+
+.browserGrid {
+    height: 90%; 
+    width:100%; 
+    font-size: small;
+    clear:both;
+}
+
+.kgViewport {
+    /* Sets the height of the KOGrids. */
+    min-height: 12em; 
+}
+/*
+	 CSS-Tricks Example
+	 by Chris Coyier
+	 http://css-tricks.com
+*/
+
+* { margin: 0; padding: 0; }
+body { font: 14px Georgia, serif; }
+
+h1 { 
+	/*width: 660px;*/ 
+	margin: 0 auto;
+	padding: 20px 0;
+	color: #222;
+}
+
+.group:before,
+.group:after {
+    content: "";
+    display: table;
+}
+.group:after {
+    clear: both;
+}
+.group {
+    zoom: 1;
+}
+
+
+.tabButtonClass {
+    padding-left: .2em;
+    padding-right: .2em;
+    background: #8ecdf1;
+    margin-bottom: .3em;
+}
+
+.tabTier1Tabs:not(#higher)
+{
+    padding-top: .1em;
+    padding-bottom: .2em;
+    margin-bottom: .6em;
+    margin-top: -.1em;
+}
+
+.tabButtonClassParent {
+    padding-left: .6em;
+    padding-right: .2em;
+    margin-bottom: .3em;
+    margin-top: -.3em;
+}
+ul li button.tabButtonClass  {
+    font-size:1.3em;
+}
+
+ul li button.tabButtonClass2  {
+    font-size:1.3em;
+}
+
+.tabChildUl
+{
+    float: none;
+    margin-top: -.75em;
+    margin-left: 1em;
+}
+
+.tabButtonClass:hover{
+    color: #FFF;
+}
+
+.CrudItem
+{
+
+}
+
+.CRUDColLabel
+{
+    font-style: oblique;
+    font-weight: bold;
+}
+.CRUDColEntry
+{
+    font-weight: bolder;
+}
+
+.CrudTable tr td:first-child
+{
+    text-align:right;
+    padding-right: 0.25em;
+    padding-left: 0.25em;
+}
+
+.Initdata
+{
+    display:none;
+}
+  .SliderDeckText{
+      position: relative; 
+      z-index: 100; 
+      background-color: rgba(200, 210, 210, 0.9);
+      font-size: 1em; 
+      line-height: 16px; 
+      text-align: left; 
+  }
+
+
+/* The following are for the slider */
+
+  .scroll-pane { overflow: auto; width: 99%; float:left; }
+  .scroll-content { width: 2440px; float: left; }
+  .scroll-content-item { width: 100px; height: 100px; float: left; margin: 10px; font-size: 3em; line-height: 96px; text-align: center; }
+  .scroll-bar-wrap { clear: left; padding: 0 4px 0 2px; margin: 0 -1px -1px -1px; }
+  .scroll-bar-wrap .ui-slider { background: none; border:0; height: 2em; margin: 0 auto;  }
+  .scroll-bar-wrap .ui-handle-helper-parent { position: relative; width: 100%; height: 100%; margin: 0 auto; }
+  .scroll-bar-wrap .ui-slider-handle { top:.2em; height: 1.5em; }
+  .scroll-bar-wrap .ui-slider-handle .ui-icon { margin: -8px auto 0; position: relative; top: 50%; }
+        /* jssor slider bullet navigator skin 03 css */
+        /*
+                            .jssorb03 div           (normal)
+                            .jssorb03 div:hover     (normal mouseover)
+                            .jssorb03 .av           (active)
+                            .jssorb03 .av:hover     (active mouseover)
+                            .jssorb03 .dn           (mousedown)
+                            */
+.jssorb03 div, .jssorb03 div:hover, .jssorb03 .av {
+    background: url(../Images/Slider/b03.png) no-repeat;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.jssorb03 div {
+    background-position: -5px -4px;
+}
+
+    .jssorb03 div:hover, .jssorb03 .av:hover {
+        background-position: -35px -4px;
+    }
+
+.jssorb03 .av {
+    background-position: -65px -4px;
+}
+
+.jssorb03 .dn, .jssorb03 .dn:hover {
+    background-position: -95px -4px;
+}
+
+/* jssor slider arrow navigator skin 03 css */
+/*
+                    .jssora03l              (normal)
+                    .jssora03r              (normal)
+                    .jssora03l:hover        (normal mouseover)
+                    .jssora03r:hover        (normal mouseover)
+                    .jssora03ldn            (mousedown)
+                    .jssora03rdn            (mousedown)
+                    */
+.jssora03l, .jssora03r, .jssora03ldn, .jssora03rdn {
+    position: absolute;
+    cursor: pointer;
+    display: block;
+    background: url(../Images/Slider/a15.png) no-repeat;
+    overflow: hidden;
+}
+
+.jssora03l {
+    background-position: -13px -33px;
+}
+
+.jssora03r {
+    background-position: -73px -33px;
+}
+
+.jssora03l:hover {
+    background-position: -133px -33px;
+}
+
+.jssora03r:hover {
+    background-position: -193px -33px;
+}
+
+.jssora03ldn {
+    background-position: -253px -33px;
+}
+
+.jssora03rdn {
+    background-position: -313px -33px;
+}
+.boldBorder {
+    border-color: red;
+    border-style: solid;
+}
+/* END SLIDER CSS */
+
+/**{
+	margin:0;
+	padding:0;
+}*/
+body {
+	/*margin:0;
+	padding:0;
+	background:#000;
+	text-align:center;
+	color:#fff;
+	font-family:Arial, Helvetica, sans-serif;
+	overflow:hidden;*/
+}
+.fp_bgPattern{
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	background:transparent url(./images/greyscale_natural_grunge3.jpg) repeat bottom left;
+	opacity:0.3;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=30);
+}
+img.fp_bgImage{
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	opacity:0.2;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=20);
+}
+h1.xxxx{
+	font-weight:normal;
+	margin:40px 0px 10px 0px;
+	text-transform:uppercase;
+}
+h2.xxxx{
+	font-weight:normal;
+	font-size:22px;
+	color:#FFED2F;
+	margin-bottom:50px;
+}
+a.xxxx{
+	outline:none;
+}
+ul.fp_galleryList{
+	list-style:none;
+	position:relative;
+}
+ul.fp_galleryList li{
+	display:inline;
+	margin:0px 30px;
+	text-transform:uppercase;
+	cursor:pointer;
+	font-size:14px;
+	text-shadow:0px 0px 1px #fff;
+}
+ul.fp_galleryList li.current{
+	color:#FFED2F;
+}
+ul.fp_galleryList li.current:hover{
+	border:none;
+}
+ul.fp_galleryList li:hover{
+	border-bottom:1px solid #fff;
+}
+#fp_thumbContainer{
+	position:relative;
+	overflow:hidden;
+	width:100%;
+	margin:50px 0 30px 0;
+	height:0px; /*240px to show*/
+	background-color:#111;
+	-moz-box-shadow:0px 0px 10px #000 inset;
+	-webkit-box-shadow:0px 0px 10px #000 inset;
+	box-shadow:0px 0px 10px #000 inset;
+}
+
+#fp_thumbScroller{
+	position:relative;
+	overflow:hidden;	
+}
+#fp_thumbScroller .container{
+	position:relative;
+	float:left;
+	display:none;
+}
+#fp_thumbScroller .content{
+	float:left;
+	margin-top:17px;
+}
+#fp_thumbScroller .content div{
+	margin:0px 5px;
+	height:100%;
+}
+#fp_thumbScroller img{
+	border:3px solid #fff;
+	height:200px;
+	-moz-box-shadow:1px 1px 3px #000;
+	-webkit-box-shadow:1px 1px 3px #000;
+	box-shadow:1px 1px 3px #000;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	border-radius:2px;
+}
+#fp_thumbScroller a{
+	padding:1px;
+}
+.fp_overlay{
+	display:none;
+	position:fixed;
+	top:0px;
+	left:0px;
+	right:0px;
+	bottom:0px;
+	z-index:10;
+	background:#000;
+	opacity:0.8;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+}
+.fp_loading{
+	display:none;
+	position:fixed;
+	top:50%;
+	left:50%;
+	margin:-35px 0px 0px -35px;
+	background:#fff url(./images/loader.gif) no-repeat center center;
+	width:70px;
+	height:70px;
+	z-index:9999;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	-moz-box-shadow:1px 1px 3px #000;
+	-webkit-box-shadow:1px 1px 3px #000;
+	box-shadow:1px 1px 3px #000;
+	opacity:0.7;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+.fp_next,
+.fp_prev,
+.fp_close{
+	width:50px;
+	height:50px;
+	position:fixed;
+	bottom:50%;
+	margin-top:-25px;
+	cursor:pointer;
+	opacity:0.7;
+	z-index:1000;
+	-moz-box-shadow:0px 0px 3px #000;
+	-webkit-box-shadow:0px 0px 3px #000;
+	box-shadow:0px 0px 3px #000;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	border-radius:2px;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+.fp_next:hover,
+.fp_prev:hover,
+.fp_close:hover
+{
+	opacity:0.9;
+}
+.fp_next{
+	background:#fff url(./images/next.png) no-repeat center center;
+	right:-50px; /*10 to show*/
+}
+.fp_prev{
+	background:#fff url(./images/prev.png) no-repeat center center;
+	left:-50px; /*10 to show*/
+}
+.fp_close{
+	display:none;
+	width:170px;
+	text-align:center;
+	padding-left:10px;
+	text-transform:uppercase;
+	line-height:50px;
+	top:10px;
+	right:10px;
+	margin-top:0px;
+	background:#fff url(./images/close.png) no-repeat 10px 50%;
+	color:#000;
+}
+.fp_scrollWrapper{
+	display:none;
+	width:300px;
+	padding:10px 45px;
+	height:12px;
+	position:relative;
+	margin:30px auto;
+	background:#111;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+}
+.ui-widget-content{
+	height:12px;
+	background-color:#353535;
+	position:relative;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+}
+.ui-slider-horizontal .ui-slider-handle{
+	margin-top:5px;
+	z-index:1;
+	outline:none;
+	cursor:pointer;
+	border:none;
+	width:15px;
+	height:12px;
+	background: #9b9b9b;
+	margin-left:-7px;
+}
+.ui-state-default {
+	background-image:none;
+}
+.fp_prev_thumb,
+.fp_next_thumb{
+	background:transparent url(./images/nav.png) no-repeat top left;
+	position:absolute;
+	top:8px;
+	width:15px;
+	height:17px;
+	cursor:pointer;
+}
+.fp_prev_thumb:hover{
+	background-position:left top;
+}
+.fp_next_thumb:hover{
+	background-position:right top;
+}
+.fp_prev_thumb{
+	left:10px;
+	background-position:left bottom;
+}
+.fp_next_thumb{
+	right:10px;
+	background-position:right bottom;
+}
+img.fp_preview{
+	position:fixed;
+	z-index:999;
+	border:3px solid #fff;
+	-moz-box-shadow:1px 1px 3px #000;
+	-webkit-box-shadow:1px 1px 3px #000;
+	box-shadow:1px 1px 3px #000;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	border-radius:2px;
+	opacity:0;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);	
+}
+/* END Slider stuff*/
