@@ -1,2 +1,2 @@
 # Jssor-KO
-JSSOR Sliders using KnockOut to display multiple updatable instances
+Use JSSOR Sliders with KnockOut to create/destroy/control multiple instances easily and dynamically.
